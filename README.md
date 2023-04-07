@@ -33,6 +33,29 @@ terraform {
  #AWS EC2 instancer provisioning                                                                      
  resource "aws_instance" "aws_ec2_test" {                                                                                          
  count = 4                                                                                                                  
- ami = "your ami"          
+ ami = "your ami"                                                                                                                            
+ instance_type =t2.micro"                                                                                                                          
+ tag = {                                                                                                                                     
+ Name = "Terraform_test_services"                                                    
+ }                                                                                                                                                         
+               }                                                                                                                         
+ 
+ 
+ #Get the public IPs for the provisioned instances                                                                                                                     
+ output "instance_pub_ip" {                                                                                                                         
+ value =aws_instance.aws_ec2_test [*].public_ip                                                                                      
+ }                                                                                                                                                       
+ 
+                                                                                                                                                        
+ #AWS S3                                                                                                                                         
+ For s3, the bucket name should be unique                                                                                                                            
+ resource "aws_s3_bucket" "b" {                                                                                                                                
+ bucket = "mohammad-tf-test-bucket"                                                                                                                                
+                                                                                                                                                                     
+ tag = {                                                                                                                                                              
+ Name = "mohammad-bucket"                                                                                                                                       
+ Environment = "Dev"                                                                                                                                                
+ }                                                                                                                                                 
+ }                                                                                                                                             
  
  
