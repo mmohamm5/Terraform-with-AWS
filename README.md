@@ -11,10 +11,28 @@ In order to connect your AWS account and Terraform. You need the access keys and
 
 export AWS_ACCESS_KEY_ID=<access key>
 export AWS_ACCESS_KEY=<secret access key>
-# Install required providers
-terraform {
- required_providers {
-  aws={
-  source = "hasicorp/aws"
-  version = "~>4.16"
-  
+# Install required providers                                                                                                         
+terraform {                                                                                                                       
+ required_providers {                                                                                                           
+  aws={                                                                                                                     
+  source = "hasicorp/aws"                                                                                                           
+  version = "~>4.16"                                                                                                         
+ }                                                                                                                      
+ }                                                                                                                                        
+    required_version = ">=1.2.0"                                                                                                                       
+ }                                                                                        
+ 
+ 
+ 
+ #Added the region where you want your instances to be 
+ 
+ provide "aws" {
+ region ="us-east-1"
+ 
+ }                                                                               
+ #AWS EC2 instancer provisioning                                                                      
+ resource "aws_instance" "aws_ec2_test" {                                                                                          
+ count = 4                                                                                                                  
+ ami = "your ami"          
+ 
+ 
